@@ -1,3 +1,4 @@
+%{?python_enable_dependency_generator}
 # If any of the following macros should be set otherwise,
 # you can wrap any of them with the following conditions:
 # - %%if 0%%{centos} == 7
@@ -44,7 +45,7 @@
 
 Name:           golang-%{provider}-%{project}-%{repo}
 Version:        0.11.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Tar archive assembly/dis-assembly
 # Detected licences
 # - BSD 3-clause "New" or "Revised" License at 'LICENSE'
@@ -58,7 +59,7 @@ BuildRequires: golang(github.com/urfave/cli)
 %endif
 
 # e.g. el6 has ppc64 arch without gcc-go, so EA tag is required
-ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
+#ExclusiveArch:  %{ix86} x86_64 %{arm} aarch64
 # If go_compiler is not set to 1, there is no virtual provide. Use golang instead.
 BuildRequires:  %{?go_compiler:compiler(go-compiler)}%{!?go_compiler:golang}
 
@@ -218,5 +219,8 @@ export GOPATH=%{buildroot}/%{gopath}:%{gopath}
 
 
 %changelog
+* Mon May 04 2020 Alfredo Moralejo <amoralej@redhat.com> - 0.11.1-2
+- Rebuild with ppc64le
+
 * Fri Nov 23 2018 Steve Baker <sbaker@redhat.com> - 0.11.1-1
 - rebuilt for upstream 0.11.1
